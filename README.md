@@ -2,6 +2,42 @@ Danh sách nhóm:
     1. Trần Tiến Khải - 2311566
 
 Hướng dẫn chạy dự án:
+    1. Truy cập trực tiếp bạn được deploy trên cloud:
+        Dự án đã được triển khai trên nền tảng Render kết hợp với Neon (PostgreSQL). Có thể truy cập tại đường dẫn: https://student-management-252.onrender.com/
+        Lưu ý: Vì ứng dụng được lưu trữ trên gói Free của Render, nên nếu không có truy cập trong một thời gian, máy chủ sẽ tự động ngủ (Spin down). Do đó, lần truy cập đầu tiên có thể mất khoảng 30 giây đến 1 phút để máy chủ khởi động lại (Cold start). Các thao tác sau đó sẽ diễn ra nhanh chóng.
+
+    2. Chạy trên máy cá nhân (Localhost):
+        Prerequisites: 
+            JDK 17 hoặc 21.
+            Trình duyệt web (Chrome, Edge, Safari,...)
+        Các bước cài đặt và khởi động:
+            1. Tải mã nguồn:
+                git clone https://github.com/khaitrnd/student-management-252.git
+                cd student-management
+
+            2. Cấu hình Environment:
+                Cần tạo 1 file là '.env' tại thư mục gốc của dự án, cung cấp các thông tin kết nối CSDL(Local hoặc Cloud) theo định dạng sau:
+                    # PostgreSQL Database Configuration
+                    POSTGRES_HOST=địa_chỉ_host_của_bạn
+                    POSTGRES_PORT=5432
+                    POSTGRES_DB=tên_database
+                    POSTGRES_USER=tên_đăng_nhập
+                    POSTGRES_PASSWORD=mật_khẩu_database
+
+                    # Spring Datasource
+                    SPRING_DATASOURCE_URL=jdbc:postgresql://${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}?sslmode=require
+                    SPRING_DATASOURCE_USERNAME=${POSTGRES_USER}
+                    SPRING_DATASOURCE_PASSWORD=${POSTGRES_PASSWORD}
+            
+            3. Khởi động ứng dụng:
+                Windows:     .\mvnw spring-boot:run
+                MacOS/Linux: ./mvnw spring-boot:run
+                Khi Terminal hiện thông báo thành công, mở trình duyệt và truy cập http://localhost:8080/ để sử dụng.
+
+            4. Sử dụng ứng dụng:
+                Ứng dụng cho phép người dùng thao tác trên một cơ sở dữ liệu cỡ nhỏ để quán lí thông tin của các sinh viên.
+                Các thông tin bao gôm: Mã số sinh viên, họ và tên, email và độ tuổi.
+                Các thao tác có thể sử dụng bao gồm: Xem chi tiết, chỉnh sửa thông tin và xóa thông tin sinh viên.
 
 Trả lời lý thuyết:
     1. Cố tình Insert một sinh viên có id trùng với một người đã có sẵn. Tại sao Database lại chặn thao tác này (báo lỗi UNIQUE constraint failed)?
